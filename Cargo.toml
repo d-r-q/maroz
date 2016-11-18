@@ -5,3 +5,6 @@ authors = ["Aleksey Zhidkov <aleksey.zhidkov@gmail.com>"]
 
 [lib]
 crate-type = ["staticlib"]
+
+[dependencies]
+rlibc = "0.1.4"
