@@ -75,6 +75,12 @@ impl Writer {
         }        
     }
 
+    pub fn write_str(&mut self, s: &str) {
+        for byte in s.bytes() {
+            self.write_byte(byte)
+        }
+    }
+
     fn buffer(&mut self) -> &mut Buffer {
         unsafe { self.buffer.get_mut() }
     }
@@ -89,5 +95,5 @@ pub fn print_something() {
         buffer: unsafe { Unique::new(0xb8000 as *mut _) },
     };
 
-    writer.write_byte(b'H');
+    writer.write_str("Hello World");
 }
