@@ -13,6 +13,7 @@ mod vga_buffer;
 
 #[no_mangle]
 pub extern fn rust_main(multiboot_information_address: usize) {
+	panic!("Test");
 	vga_buffer::clear_screen();
 	let boot_info = unsafe{ multiboot2::load(multiboot_information_address) };
 	let memory_map_tag = boot_info.memory_map_tag()
@@ -37,5 +38,10 @@ pub extern "C" fn _Unwind_Resume() -> ! {
 
 #[lang = "panic_fmt"] 
 #[no_mangle]
-extern fn panic_fmt() -> ! { loop{}}
+extern fn panic_fmt(fmt: core::fmt::Arguments, file: &'static str, line: u32) -> ! 
+{ 
+	println!("\n\nPANIC in {} at line {}:", file, line);
+	println!("    {}", fmt);
+	loop{}
+}
 
