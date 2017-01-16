@@ -26,5 +26,8 @@ pub extern "C" fn _Unwind_Resume() -> ! {
 }
 
 #[lang = "eh_personality"] extern fn eh_personality() {}
-#[lang = "panic_fmt"] extern fn panic_fmt() -> ! { loop{}}
+
+#[lang = "panic_fmt"] 
+#[no_mangle]
+extern fn panic_fmt() -> ! { loop{}}
 
