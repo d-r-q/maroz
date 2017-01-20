@@ -12,6 +12,9 @@ extern crate multiboot2;
 mod vga_buffer;
 mod memory;
 
+#[macro_use]
+extern crate bitflags;
+
 #[no_mangle]
 pub extern fn rust_main(multiboot_information_address: usize) {
 	vga_buffer::clear_screen();
