@@ -27,12 +27,13 @@ impl Entry {
 	}
 
 	pub fn set(&mut self, frame: Frame, flags: EntryFlags) {
-		assert!(frame.start_address() & ~0x000fffff_fffff000 == 0);
+		assert!(frame.start_address() & !0x000fffff_fffff000 == 0);
 		self.0 = (frame.start_address() as u64) | flags.bits();
+	}
 }
 
 bitflags! { 
-	pub flags EntryFlags: 64 {
+	pub flags EntryFlags: u64 {
 		const PRESENT = 1 << 0,
 		const WRITABLE = 1 << 1,
 		const USER_ACCESSIBLE = 1 << 2,
